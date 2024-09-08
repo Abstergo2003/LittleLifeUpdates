@@ -72,7 +72,7 @@
 2.2 Static template
 
 ```html
-    <template id="yourCustomID">
+<template id="yourCustomID">
     <style>
         h1 {
             color: brown;
