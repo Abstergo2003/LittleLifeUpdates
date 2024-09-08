@@ -54,6 +54,7 @@
 ### How to create templates
 1. In your project create dir: "templates\\main.html"
 2. Inside "main.html" write normal html code like shown below:
+
 2.1 Dynamic Template
 
 ```html
