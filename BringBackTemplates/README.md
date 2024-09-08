@@ -72,15 +72,15 @@
 2.2 Static template
 
 ```html
-<template id="yourCustomID">
-    <style>
-        h1 {
-            color: brown;
-        }
-    </style>
-    <h1>Static Title</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, veritatis. Nam fugiat assumenda, recusandae nesciunt, eveniet repellendus, voluptate consequatur soluta vel eaque enim unde reprehenderit eius. Quidem sequi dicta eum.</p>
-</template>
+    <template id="yourCustomID">
+        <style>
+            h1 {
+                color: brown;
+            }
+        </style>
+        <h1>Static Title</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, veritatis. Nam fugiat assumenda, recusandae nesciunt, eveniet repellendus, voluptate consequatur soluta vel eaque enim unde reprehenderit eius. Quidem sequi dicta eum.</p>
+    </template>
 ```
 
 2.3 Please not that two templates can't have the same ID, and you will access templates by ID, but when appended to page they will gain custom id to eneable multiple instances loaded into one page.
