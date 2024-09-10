@@ -1,13 +1,12 @@
 GLOBAL_TEMPLATES = {}
 
-// loads templates into global variable GLOBAL_TEMPLATES
 async function importTemplates(path = "templates/main.html") {
     const response = await fetch(path)
     const text = await response.text()
     let parser = new DOMParser()
-    let templatesDOM = parser.parseFromString(text, "text/html")
-    let templatesElements = templatesDOM.querySelectorAll("template")
-    templatesElements.forEach(tem => {
+    let templatesDOM = await parser.parseFromString(text, "text/html")
+    let templatesElements = await templatesDOM.querySelectorAll("template")
+    await templatesElements.forEach(tem => {
         const element = tem.innerHTML
         let div = document.createElement('div')
         div.id = tem.id
@@ -20,8 +19,6 @@ async function importTemplates(path = "templates/main.html") {
     })
     document.dispatchEvent(event)
 }
-
-// lists all templates, function exist so that the template list would contain HTML Elements and not string
 function listTemplates() {
     const keys = Object.keys(GLOBAL_TEMPLATES)
     keys.forEach(key => {
@@ -32,20 +29,23 @@ function listTemplates() {
     })
 }
 
-// returns ready element with inserted data YOU passed as JSON Object, you can also pass custom id
-// if you are trying to get Dynamic template and don't pass data it will result in error, there is no need to pass data to static element
-function getElement(tem, data={}, id) {
+function getElement(tem, options={}, id) {
     let element = tem
     let ID = id ?? new Date().getTime()
 
-    let keys = Object.keys(data)
+    let keys = Object.keys(options)
     keys.forEach(key => {
-        element = element.replace(`\$\{${key}\}`, data[key])
+        element = element.replace(`\@@\{${key}\}`, options[key])
     })
-    let index = element.indexOf("$")
+    try {
+        element = element.replaceAll("@@{TID}", id)
+    } catch {
+
+    }
+    let index = element.indexOf("@@")
     if (index != -1) {
         let name = ""
-        index += 2
+        index += 3
         do {
             name += element[index]
             index++
@@ -61,9 +61,25 @@ function getElement(tem, data={}, id) {
     let shadowRoot = div.attachShadow({mode: "open"})
     let children = helpingDIV.children
 
+    const scripts = helpingDIV.querySelectorAll('script');
+    scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        if (script.src) {
+            // If script has a src, copy the src attribute
+            newScript.src = script.src;
+        } else {
+            // If script is inline, copy the content
+            newScript.textContent = script.textContent;
+        }
+        shadowRoot.appendChild(newScript); // Append script to shadow DOM
+        script.remove(); // Remove script from temporary div to avoid duplicate execution
+    });
     // for some stupid reason when appendChild is called element is poped from HTML Collection so i just do not modify "i" and always get first element
     for (let i = 0; i< children.length; i) {
         shadowRoot.appendChild(children[i])
     }
     return div
 }
+const delay = (delayInms) => {
+    return new Promise(resolve => setTimeout(resolve, delayInms));
+};

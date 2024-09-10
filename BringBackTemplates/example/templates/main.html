@@ -1,21 +1,12 @@
-<!--Example of dynamic template with arguments to pass to it-->
-<template id="standardDynamicTitle">
+<template id="standardTitle">
     <style>
         h1 {
             color: blue;
         }
     </style>
-    <h1>${title}</h1>
-    <p>${desc}</p>
-</template>
-
-<!--Example of static template, where there is no arguments to pass-->
-<template id="standardStaticTitle">
-    <style>
-        h1 {
-            color: brown;
-        }
-    </style>
-    <h1>Static Title</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, veritatis. Nam fugiat assumenda, recusandae nesciunt, eveniet repellendus, voluptate consequatur soluta vel eaque enim unde reprehenderit eius. Quidem sequi dicta eum.</p>
+    <h1>@@{title}</h1>
+    <p>@@{desc}</p>
+    <script>
+        console.log(document.querySelector("#@@{id}"))
+    </script>
 </template>

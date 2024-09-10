@@ -38,7 +38,7 @@
 2.2 Ore you can just pass it to the function and map function to button click
 
 ```html
-    <button onclick="getStatciTitle()">Click Me!</button>
+    <button onclick="getStaticTitle()">Click Me!</button>
 ```
 ```js
     function getStaticTitle() {
@@ -54,6 +54,7 @@
 ### How to create templates
 1. In your project create dir: "templates\\main.html"
 2. Inside "main.html" write normal html code like shown below:
+
 2.1 Dynamic Template
 
 ```html
@@ -63,8 +64,14 @@
                 color: blue;
             }
         </style>
-        <h1>${title}</h1>
-        <p>${desc}</p>
+        <h1>@@{title}</h1>
+        <p>@@{desc}</p>
+        <script>
+            console.log(document.querySelector("#@@{TID}"))
+            // by putting @@{TID} it will be replaced by id that
+            // template parent element will receive
+            // you can also specify src of the script tag
+        </script>
     </template>
 ```
 
@@ -72,16 +79,17 @@
 
 ```html
     <template id="yourCustomID">
-    <style>
-        h1 {
-            color: brown;
-        }
-    </style>
-    <h1>Static Title</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, veritatis. Nam fugiat assumenda, recusandae nesciunt, eveniet repellendus, voluptate consequatur soluta vel eaque enim unde reprehenderit eius. Quidem sequi dicta eum.</p>
-</template>
+        <style>
+            h1 {
+                color: brown;
+            }
+        </style>
+        <h1>Static Title</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, veritatis. Nam fugiat assumenda, recusandae nesciunt, eveniet repellendus, voluptate consequatur soluta vel eaque enim unde reprehenderit eius. Quidem sequi dicta eum.</p>
+    </template>
 ```
+2.3 Framework doesn't really diffrentiate beetwen static and dynamic element, so you can mix them thogether.
 
-2.3 Please not that two templates can't have the same ID, and you will access templates by ID, but when appended to page they will gain custom id to eneable multiple instances loaded into one page.
+2.4 Please not that two templates can't have the same ID, and you will access templates by ID, but when appended to page they will gain custom id to eneable multiple instances loaded into one page.
 
 ## Have fun using
