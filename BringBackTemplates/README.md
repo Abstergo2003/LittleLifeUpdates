@@ -16,9 +16,14 @@
 
     //custom path
     importTemplates("your/custom/path.html")
+
+    //from text
+    importTemplatesText("<template><img src='media/icon.ico'></template>")
 ```
 2. Get elements using "getElement()" function
-2.1 If You need template to build page as it loads, you need to wrap building in event litener, and the use getElemenetFunction, there is no need to pass custom ID in neither cases.
+2.1 If You need template to build page as it loads, you need to wrap building in event litener, and the use getElemenetFunction, there is no need to pass custom ID in neither cases. 
+
+When using "getElement()" method, your defined styles will not be applied, only global styles will have effect. To eneable local styles use "getIsolatedElement()".
 
 ```js
     document.addEventListener("templatesImported", () => {
@@ -88,7 +93,7 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, veritatis. Nam fugiat assumenda, recusandae nesciunt, eveniet repellendus, voluptate consequatur soluta vel eaque enim unde reprehenderit eius. Quidem sequi dicta eum.</p>
     </template>
 ```
-2.3 Framework doesn't really diffrentiate beetwen static and dynamic element, so you can mix them thogether.
+2.3 Framework doesn't really diffrentiate beetwen static and dynamic element, so you can mix them thogether, nor does it diffrentiate beetwen isolated or global element.
 
 2.4 Please not that two templates can't have the same ID, and you will access templates by ID, but when appended to page they will gain custom id to eneable multiple instances loaded into one page.
 
