@@ -3,3 +3,4 @@
 
 ## Newest projects
  * ##### BringBackTemplates
+ * ##### CreateDesktopShortcut
